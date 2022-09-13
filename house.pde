@@ -5,21 +5,68 @@
 //colors
 color teal = #008080;
 color peach = #FFD1C1;
-color green = #90EE90;
+color green = #90EE90;   
+
+//animation variables
+float cloudY = 130;
+float cloudX = 200;
+
+//booleaan values
+boolean cloudBefore = true;
+boolean cloudAfter = false;
 
 void setup() {
   size(800,800);
-  background(teal);
   
 }
 
 
 void draw() {
+  background(teal);
+  
   //ground
   noStroke();
   fill(green);
   rect(0,630,800,150);
   
+  //cloud
+  noStroke();
+  fill(255,255,255);
+  circle(cloudX-50,cloudY+20,100);
+  circle(cloudX+20,cloudY, 100);
+  circle(cloudX+90,cloudY+20,100);
+  circle(cloudX+20,cloudY+40,100);
+
+
+  //booleans 
+  if (cloudX < width/2-50) {
+    cloudBefore = true;
+    cloudAfter = false;
+  } else {
+    cloudBefore = false;
+   cloudAfter = true; 
+  }
+
+
+  //animation of cloud
+  
+  if(cloudBefore) {
+  cloudY = cloudY - 1.5;
+  cloudX+=1.5;
+  } else {
+   cloudX+=1.5;
+   cloudY+=1.5;
+    
+  }
+  
+  
+  
+
+  //face
+  fill(0);
+  circle(cloudX-10, cloudY,10);
+  circle(cloudX+50, cloudY,10);
+  curve(cloudX-50, cloudY, cloudX, cloudY+30, cloudX+50, cloudY+30, cloudX+70, cloudY);
   
   //house outline
   stroke(0,0,0);
@@ -53,19 +100,8 @@ void draw() {
   line(400, 340, 400, 480);
   
   
-  //cloud
-  noStroke();
-  fill(255,255,255);
-  circle(150,80,100);
-  circle(220, 60, 100);
-  circle(290,80,100);
-  circle(220,100,100);
-
-  //face
-  fill(0);
-  circle(190, 60,10);
-  circle(250, 60,10);
-  curve(150, 60, 200, 90, 250, 90, 270, 60);
+  
+  
 }
  
   
